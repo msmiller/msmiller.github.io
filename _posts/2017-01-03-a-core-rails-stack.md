@@ -68,7 +68,8 @@ class Account < ActiveRecord::Base {
 
 ## high_voltage
 
-You're always going to need some static pages. Privacy Policy. About Us. And so on. High Voltage is an easy drop-in
-to help get those pages rigged in a hurry.
+You're always going to need some static pages. Privacy Policy. About Us. And so on. High Voltage is an easy drop-in engine
+to help get those pages rigged in a hurry. If you need something fancier - like ACL on some pages, it's easy enough to
+paste in the example PagesController and tweak it to your liking.
 
-#writing/blogs
+**Get it:** [high_voltage on Github](https://github.com/thoughtbot/high_voltage)
