@@ -23,6 +23,9 @@ layout: default
   <div class="content">
     {{ post.content | strip_html | truncatewords: 50 }}
   </div>
+  <div class="content">
+    {{ post.excerpt }}
+  </div>
   <hr>
 {% endfor %}
 
