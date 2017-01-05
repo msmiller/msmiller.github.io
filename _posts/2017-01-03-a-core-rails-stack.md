@@ -34,9 +34,35 @@ rake db:seed:development:users  # Load the seed data from db/seeds/development/u
 rake db:seed:original           # Load the seed data from db/seeds.rb
 ```
 
-[Seedbank on Github](https://github.com/james2m/seedbank)
+**Get it:** [seedbank on Github](https://github.com/james2m/seedbank)
 
-## AwesomePrint
+## awesome_print
+
+I rely on print statements a lot when bringing up new code or debugging. It's just faster for my style of working. AwesomePrint will
+print out the object in question all nicely formatted so you can see what's in there without going blind trying to visually
+parse a raw `object.inspect` output.
+
+```
+rails> ap Account
+class Account < ActiveRecord::Base {
+                 :id => :integer,
+            :user_id => :integer,
+        :assigned_to => :integer,
+               :name => :string,
+             :access => :string,
+            :website => :string,
+    :toll_free_phone => :string,
+              :phone => :string,
+                :fax => :string,
+         :deleted_at => :datetime,
+         :created_at => :datetime,
+         :updated_at => :datetime,
+              :email => :string,
+    :background_info => :string
+}
+```
+
+**Get it:** [awesome_print on Github](https://github.com/awesome-print/awesome_print)
 
 ## ActsAsTaggabble
 
