@@ -1,3 +1,7 @@
+---
+title: Core Rails Stack
+---
+
 Setting up a new Rails project requires first putting in place all the core Gems and plugins you like to use. After years
 of performing this task, I've settled on a set for Rails 5 that "just works" for me. One of the main goals is using Gems
 which reduce the bloat of Models and Controllers, and which generally make life easier.
@@ -69,7 +73,7 @@ class Account < ActiveRecord::Base {
 ## high_voltage
 
 You're always going to need some static pages. Privacy Policy. About Us. And so on. High Voltage is an easy drop-in engine
-to help get those pages rigged in a hurry. If you need something fancier - like ACL on some pages, it's easy enough to
+to help get those pages rigged in a hurry. If you need something fancier - like ACL on some pages - it's easy enough to
 paste in the example PagesController and tweak it to your liking.
 
 **Get it:** [high_voltage on Github](https://github.com/thoughtbot/high_voltage)
