@@ -2,7 +2,7 @@
 title: Fast Window Overlap Checking Algorithm
 ---
 
-From deep in my archives ...
+_From deep in my archives ..._
 
 Many algorithms to check if two windows overlap (a very common activity in window system and interface design) rely on doing multiple comparisons of the positions of the sides of the two rectangular areas in question. This is usually fine for most instances, especially in these days of multi-gigahertz desktop PC's. But sometimes you need to do so many such comparisons that speed becomes the paramount concern. And sometimes you do not have a super fast processor to rely on - such as on small hand-held devices or cell-phones.
 
