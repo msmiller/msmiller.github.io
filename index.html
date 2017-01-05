@@ -2,6 +2,7 @@
 layout: default
 ---
 
+<!--
 <h1>Posts</h1>
 
 <ul>
@@ -11,7 +12,7 @@ layout: default
     </li>
   {% endfor %}
 </ul>
-
+-->
 
 <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
@@ -20,8 +21,9 @@ layout: default
     <span class="date">{{ post.date }}</span>
   </p>
   <div class="content">
-    {{ post.content }}
+    {{ post.excerpt }}
   </div>
+  <hr>
 {% endfor %}
 
 <!-- Pagination links -->
