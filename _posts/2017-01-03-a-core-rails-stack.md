@@ -25,7 +25,7 @@ which reduce the bloat of Models and Controllers, and which generally make life 
 
 Seed Bank lets you break your database seeds into multiple files. This lets you do things like:
 
-```
+```bash
 rake db:seed                    # Load the seed data from db/seeds.rb, db/seeds/*.seeds.rb and db/seeds/ENVIRONMENT/*.seeds.rb. ENVIRONMENT is the current environment in Rails.env.
 rake db:seed:bar                # Load the seed data from db/seeds/bar.seeds.rb
 rake db:seed:common             # Load the seed data from db/seeds.rb and db/seeds/*.seeds.rb.
@@ -42,7 +42,7 @@ I rely on print statements a lot when bringing up new code or debugging. It's ju
 print out the object in question all nicely formatted so you can see what's in there without going blind trying to visually
 parse a raw `object.inspect` output.
 
-```
+```ruby
 rails> ap Account
 class Account < ActiveRecord::Base {
                  :id => :integer,
