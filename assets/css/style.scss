@@ -3,4 +3,5 @@
 
 @import "{{ site.theme }}";
 
-#sitename, #sitedesc, .view { font-family: 'Inconsolata', monospace; }
+html, body { font-family: 'Inconsolata', monospace; }
+#sitedesc { color: #666; }
