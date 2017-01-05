@@ -23,7 +23,7 @@ layout: default
   <div class="content">
     {{ post.content | strip_html | truncatewords: 50 }}
   </div>
-  <hr style="margin-top:10px;">
+  <hr style="margin-top:20px;">
 {% endfor %}
 
 <!-- Pagination links -->
@@ -33,7 +33,9 @@ layout: default
   {% else %}
     <span class="previous">Previous</span>
   {% endif %}
+  |
   <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  |
   {% if paginator.next_page %}
     <a href="{{ paginator.next_page_path }}" class="next">Next</a>
   {% else %}
