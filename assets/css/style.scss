@@ -6,5 +6,6 @@
 html, body { font-family: 'Inconsolata', monospace; }
 #sitename { margin-bottom: 0px; }
 #sitename a { color: black; cursor: pointer; }
+#sitename a:hover { text-decoration: underline; }
 #sitedesc { color: #aaa; margin-top: 0px; }
 #sitename { margin-top: 10px; }
