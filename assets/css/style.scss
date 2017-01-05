@@ -4,6 +4,7 @@
 @import "{{ site.theme }}";
 
 html, body { font-family: 'Inconsolata', monospace; }
-#sitename * { color: black; cursor: pointer; margin-bottom: 0px; }
+#sitename { margin-bottom: 0px; }
+#sitename a { color: black; cursor: pointer; }
 #sitedesc { color: #aaa; margin-top: 0px; }
 #sitename { margin-top: 10px; }
