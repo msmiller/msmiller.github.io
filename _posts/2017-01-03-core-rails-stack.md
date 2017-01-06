@@ -9,11 +9,57 @@ which reduce the bloat of Models and Controllers, and which generally make life 
 
 ## Cells
 
-## Active-Interactions
+## active_interaction
+
+Active Interaction is a way to split out business logic from your Models and Controllers. Any time I have code
+that's going to work on more than one Model class, or where the operation will take more than 20 lines, I like
+to spin up an ActiveInteraction so that the logic is isolated and doesn't clog up my Models and Controllers.
+ActiveInteractions have validation so this is also another firewall against passing bad data into the bowels of
+your system
+
+```ruby
+#### define the ActiveInteraction ...
+
+require 'active_interaction'
+
+class Square < ActiveInteraction::Base
+  float :x
+
+  def execute
+    x**2
+  end
+end
+
+#### using the ActiveInteraction ...
+
+outcome = Square.run(x: 'two point one')
+outcome.valid?
+# => nil
+outcome.errors.messages
+# => {:x=>["is not a valid float"]}
+
+outcome = Square.run(x: 2.1)
+outcome.valid?
+# => true
+outcome.result
+# => 4.41
+```
+
+What you can also do is organize your ActiveInteractions into subfolders that either relate to
+Models or abstract concepts (like 'send_emails').
+
+```
+# .../config/application.rb
+config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
+```
+
+**Get It:** [draper on Github](https://github.com/orgsync/active_interaction)
+
+**Learn More:** [http://devblog.orgsync.com/active_interaction/)
 
 ## draper
 
-Draper lets you move all your view-centric methods out of models to keep them smaller and lighter. Why do you want this
+Draper lets you move all your view-centric methods out of Models to keep them smaller and lighter. Why do you want this
 when Rails already provides Helpers? One reason is that Helpers are more or less bound to ActionView. So if you're
 kicking data out over JSON, they may not be as helpful. It also allows you to make your Rails app more of an object
 broker in that the back-end has control over representation without getting page rendering into the mix.
@@ -41,6 +87,8 @@ end
 # Using a decorator:
 @articles = Article.popular.decorate
 ```
+
+**Get It:** [draper on Github](https://github.com/drapergem/draper)
 
 ## Pundit
 
