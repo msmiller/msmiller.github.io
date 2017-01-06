@@ -55,7 +55,7 @@ config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
 
 **Get It:** [draper on Github](https://github.com/orgsync/active_interaction)
 
-**Learn More:** [http://devblog.orgsync.com/active_interaction/)
+**Learn More:** [http://devblog.orgsync.com/active_interaction/](http://devblog.orgsync.com/active_interaction/)
 
 ## draper
 
@@ -99,9 +99,80 @@ Gem for doing this.
 
 ## Rolify
 
-## Semantic-UI-SASS
+## semantic-ui-sass
 
-## SettingsLogic
+Most people seem to have gravitated to either the Bootstrap or Foundation UI frameworks. These are both great,
+mature products which take a "mobile first" perspective. The problem I kept having is getting them to work
+with Rails. There were frequent dependency clashes with SASS and Compass, not to mention issues with the
+Javascript components and Turbolinks.
+
+Semantic UI is very stable, looks great, and installs without issue. It's not a "one-line drop-in" like the
+others. You need to wire up JavaScript for various classes to work. The other toolkits provide an "all-in-one"
+JavaScript function that runs all the components ... which is "easier" but also a lot less transparent and
+prone to conflicts.
+
+**Get It:** [semantic-ui-sass on Github](https://github.com/doabit/semantic-ui-sass)
+
+**Learn More:** [http://semantic-ui.com/](http://semantic-ui.com/)
+
+## settingslogic
+
+SettingsLogic is like wrapping a Model around a loaded YAML configuration file. There are so many cases where you have data that's
+either static or changes very seldomly - but you want more than just a table of values loaded from YAML. You want to be able
+to condition the settings for use in the system, or make decisions before returning a value. This is where SettingsLogic
+is so handy. I use it for things like billing plans (which rarely change) or branding settings (where I want to condition the
+setting value for rendering).
+
+##### 1. Define the Model
+
+```ruby
+class Settings < Settingslogic
+  source "#{Rails.root}/config/application.yml"
+  namespace Rails.env
+end
+```
+
+##### 2. Define the Settings
+
+```ruby
+# config/application.yml
+defaults: &defaults
+  cool:
+    saweet: nested settings
+  neat_setting: 24
+  awesome_setting: <%= "Did you know 5 + 5 = #{5 + 5}?" %>
+
+development:
+  <<: *defaults
+  neat_setting: 800
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+```
+
+##### 3. Use the Model
+
+```ruby
+>> Rails.env
+=> "development"
+
+>> Settings.cool
+=> "#<Settingslogic::Settings ... >"
+
+>> Settings.cool.saweet
+=> "nested settings"
+
+>> Settings.neat_setting
+=> 800
+
+>> Settings.awesome_setting
+=> "Did you know 5 + 5 = 10?"
+```
+
+**Get It:** [settingslogic on Github](https://github.com/binarylogic/settingslogic)
 
 ## Kanimari
 
