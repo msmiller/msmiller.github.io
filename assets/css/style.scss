@@ -47,37 +47,37 @@ td.post-date { text-align: right; font-size: 0.9em; }
 
 @keyframes "blink" {
   from, to {
-    background: transparent;
+    color: transparent;
   }
   50% {
-    background: #bcb; // black;
+    color: #bcb; // black;
   }
 }
 
 @-moz-keyframes blink {
   from, to {
-    background: transparent;
+    color: transparent;
   }
   50% {
-    background: #bcb; // black;
+    color: #bcb; // black;
   }
 }
 
 @-webkit-keyframes "blink" {
   from, to {
-    background: transparent;
+    color: transparent;
   }
   50% {
-    background: #bcb; // black;
+    color: #bcb; // black;
   }
 }
 
 @-ms-keyframes "blink" {
   from, to {
-    background: transparent;
+    color: transparent;
   }
   50% {
-    background: #bcb; // black;
+    color: #bcb; // black;
   }
 }
 
