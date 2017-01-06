@@ -14,19 +14,18 @@ html, body, h1 { font-family: 'Inconsolata', monospace; }
 
 div.share-page {
     padding: 8px 15px;
-
     border-top: 1px solid #ddd;
 
     a {
         font-weight: 700;
-        color: #fff;
         margin-left: 10px;
 
         border: 1px solid #ccc;
         padding: 2px 3px;
+        border-radius: 2px;
 
         &:hover {
-            background: gold;
+            background: #bcb;
         }
     }
 }
