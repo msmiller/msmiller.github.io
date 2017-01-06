@@ -36,7 +36,7 @@ td.post-date { text-align: right; font-size: 0.9em; }
 
 .blinking-cursor {
   //font-weight: 100;
-  font-size: 20px; // 30px;
+  font-size: 24px; // 30px;
   color: #bcb; // #2E3D48;
   -webkit-animation: 1s blink step-end infinite;
   -moz-animation: 1s blink step-end infinite;
@@ -50,7 +50,7 @@ td.post-date { text-align: right; font-size: 0.9em; }
     background: transparent;
   }
   50% {
-    background: #ded; // black;
+    background: #bcb; // black;
   }
 }
 
@@ -59,7 +59,7 @@ td.post-date { text-align: right; font-size: 0.9em; }
     background: transparent;
   }
   50% {
-    background: #ded; // black;
+    background: #bcb; // black;
   }
 }
 
@@ -68,7 +68,7 @@ td.post-date { text-align: right; font-size: 0.9em; }
     background: transparent;
   }
   50% {
-    background: #ded; // black;
+    background: #bcb; // black;
   }
 }
 
@@ -77,7 +77,7 @@ td.post-date { text-align: right; font-size: 0.9em; }
     background: transparent;
   }
   50% {
-    background: #ded; // black;
+    background: #bcb; // black;
   }
 }
 
@@ -86,6 +86,6 @@ td.post-date { text-align: right; font-size: 0.9em; }
     color: transparent;
   }
   50% {
-    color: #ded; // black;
+    color: #bcb; // black;
   }
 }
