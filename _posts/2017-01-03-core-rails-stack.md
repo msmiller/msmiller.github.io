@@ -70,6 +70,8 @@ class Account < ActiveRecord::Base {
 
 ## ActsAsTaggabble
 
+If your users will be organizing content in any way, you want tagging. [TBD]
+
 ## high_voltage
 
 You're always going to need some static pages. Privacy Policy. About Us. And so on. High Voltage is an easy drop-in engine
