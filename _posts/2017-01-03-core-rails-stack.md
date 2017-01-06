@@ -38,7 +38,7 @@ rake db:seed:development:users  # Load the seed data from db/seeds/development/u
 rake db:seed:original           # Load the seed data from db/seeds.rb
 ```
 
-**Get it:** [seedbank on Github](https://github.com/james2m/seedbank)
+**Get It:** [seedbank on Github](https://github.com/james2m/seedbank)
 
 ## awesome_print
 
@@ -66,7 +66,7 @@ class Account < ActiveRecord::Base {
 }
 ```
 
-**Get it:** [awesome_print on Github](https://github.com/awesome-print/awesome_print)
+**Get It:** [awesome_print on Github](https://github.com/awesome-print/awesome_print)
 
 ## ActsAsTaggabble
 
@@ -76,4 +76,18 @@ You're always going to need some static pages. Privacy Policy. About Us. And so 
 to help get those pages rigged in a hurry. If you need something fancier - like ACL on some pages - it's easy enough to
 paste in the example PagesController and tweak it to your liking.
 
-**Get it:** [high_voltage on Github](https://github.com/thoughtbot/high_voltage)
+**Get It:** [high_voltage on Github](https://github.com/thoughtbot/high_voltage)
+
+## sendgrid
+
+If your users will be logging in, that means you'll be sending account confirmations - so you need email. There's a few
+choices for email-send providers, but I've found SendGrid to be the best. You can send via SMTP, API, or their "bulk send" API
+(for when you're really pounding out the emails). Why not just use your server's built-in SMTP? Well, you can do that. But SendGrid
+also provides click tracking, delivery confirmations, and email-open tracking. Plus it means you don't need to spend money
+on a server just for sending emails.
+
+**Get It:** [sendgrid on Github](https://github.com/stephenb/sendgrid)
+
+**Learn More:** [http://sendgrid.com](http://sendgrid.com)
+
+## paperclip
