@@ -11,3 +11,25 @@ html, body, h1 { font-family: 'Inconsolata', monospace; }
 #sitename { margin-top: 10px; }
 
 .content { font-size: 1.1em; }
+
+.share-page {
+    text-align: center;
+    background: $secondary-color;
+    color: $light-color;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 1.5 * $spacing-unit 0;
+
+    a {
+        font-weight: 700;
+        color: #fff;
+        margin-left: 10px;
+
+        border: 1px solid #ccc;
+        padding: 2px 3px;
+
+        &:hover {
+            background: gold;
+        }
+    }
+}
