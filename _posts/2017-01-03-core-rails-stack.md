@@ -11,11 +11,43 @@ which reduce the bloat of Models and Controllers, and which generally make life 
 
 ## Active-Interactions
 
-## Draper
+## draper
+
+Draper lets you move all your view-centric methods out of models to keep them smaller and lighter. Why do you want this
+when Rails already provides Helpers? One reason is that Helpers are more or less bound to ActionView. So if you're
+kicking data out over JSON, they may not be as helpful. It also allows you to make your Rails app more of an object
+broker in that the back-end has control over representation without getting page rendering into the mix.
+
+```ruby
+# Decorator example
+class ArticleDecorator < Draper::Decorator
+  delegate_all
+
+  def publication_status
+    if published?
+      "Published at #{published_at}"
+    else
+      "Unpublished"
+    end
+  end
+
+  def published_at
+    object.published_at.strftime("%A, %B %e")
+  end
+end
+```
+
+```ruby
+# Using a decorator:
+@articles = Article.popular.decorate
+```
 
 ## Pundit
 
-## Devise
+## devise
+
+Odds are whatever you're coding will require users to create accounts and log in. Devise is pretty much the standard
+Gem for doing this.
 
 ## Rolify
 
