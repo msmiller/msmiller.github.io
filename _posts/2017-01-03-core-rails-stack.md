@@ -4,10 +4,44 @@ title: Core Rails Stack
 
 Setting up a new Rails project requires first putting in place all the core Gems and plugins you like to use. After years
 of performing this task, I've settled on a set for Rails 5 that "just works" for me. One of the main goals is using Gems
-which reduce the bloat of Models and Controllers, and which generally make life easier.
+which reduce the bloat of Models and Controllers, and which generally make life easier so I can focus on what I'm building
+instead of wrangling code. The Cells, ActiveInteractions, and Draper gems specifically fall into this category - they allow
+a lot of code that would otherwise be stuck in Models, Controllers, or Views to be broken out into independent modules.
 
 
-## Cells
+## cells
+
+Code re-use is a good thing. But when you start trying to do this in your Views, it can lead to a tangled,
+horrific mess. Conditionals and calculated values strewn all about. This is where Cells comes in - it
+essentially creates a Model wrapper around specific views. So your "menu bar" no longer is just a partial,
+it's now an actual Model with state and methods and validation. The Cell code combines a model and the view as
+well, so everything's kept together.
+
+```ruby
+# The Cell Model
+class CommentCell < Cell::ViewModel
+  property :body
+  property :author
+
+  def show
+    render
+  end
+
+private
+  def author_link
+    link_to "#{author.email}", author
+  end
+end
+
+# The 'show' Cell View
+
+<h3>New Comment</h3>
+  <%= body %>
+
+By <%= author_link %>
+```
+
+**Get It:** [cells on Github](https://github.com/trailblazer/cells)
 
 ## active_interaction
 
@@ -53,7 +87,7 @@ Models or abstract concepts (like 'send_emails').
 config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
 ```
 
-**Get It:** [draper on Github](https://github.com/orgsync/active_interaction)
+**Get It:** [active_interaction on Github](https://github.com/orgsync/active_interaction)
 
 **Learn More:** [http://devblog.orgsync.com/active_interaction/](http://devblog.orgsync.com/active_interaction/)
 
@@ -90,14 +124,63 @@ end
 
 **Get It:** [draper on Github](https://github.com/drapergem/draper)
 
-## Pundit
+## pundit
+
+There are two main go-to ACL Gems, Pundit and CanCan. I like Pundit. Rather than put all the ACL rules into
+one file like CanCan does, Pundit has per-Model-class policies, as well as the concept of scopes. It's a little
+more work at first to get going with Pundit because it does have multiple files (it's always quicker to hack
+one big file, right?), but the end result is better and more maintainable.
+
+```ruby
+class PostPolicy
+  attr_reader :user, :post
+
+  def initialize(user, post)
+    @user = user
+    @post = post
+  end
+
+  def update?
+    user.admin? or not post.published?
+  end
+```
+
+**Get It:** [pundit on Github](https://github.com/elabs/pundit)
 
 ## devise
 
 Odds are whatever you're coding will require users to create accounts and log in. Devise is pretty much the standard
-Gem for doing this.
+Gem for doing this. You can also generate the views into your source tree so you can customize account management.
+There's plenty of options and plugins. There's enough written about Devise that there's no need to repeat it all here.
 
-## Rolify
+**Get It:** [devise on Github](https://github.com/plataformatec/devise)
+
+## rolify
+
+So you're writing your code and there's a part where you only want Admin's to get at. Or maybe you want to
+block guest Users from seeing certain features. Sure, you can add flags to the User record to say who's an
+Admin and so forth. But what you really want is the concept of Roles. What's cool about Rolify is the concept
+of scopes. For instance, you can make a User be a 'moderator' for all Forums, one Forum, or one Post.
+
+```ruby
+# To define a global role:
+user = User.find(1)
+user.add_role :admin
+
+# To define a role scoped to a resource instance:
+user = User.find(2)
+user.add_role :moderator, Forum.first
+
+# To define a role scoped to a resource class:
+user = User.find(3)
+user.add_role :moderator, Forum
+
+# Remove role:
+user = User.find(3)
+user.remove_role :moderator
+```
+
+**Get It:** [rolify on Github](https://github.com/RolifyCommunity/rolify)
 
 ## semantic-ui-sass
 
@@ -174,7 +257,18 @@ production:
 
 **Get It:** [settingslogic on Github](https://github.com/binarylogic/settingslogic)
 
-## Kanimari
+## kaminari
+
+Kaminari is a really nice pagination gem. Their Github page explains everything pretty well. This gem has plenty of
+options and you can over-ride defaults at pretty much every level.
+
+Note that you can install views specific to Semantic UI with:
+
+```
+rails g kaminari:views semantic-ui
+```
+
+**Get It:** [kaminari on Github](https://github.com/amatsuda/kaminari)
 
 ## seedbank
 
@@ -219,9 +313,23 @@ class Account < ActiveRecord::Base {
 
 **Get It:** [awesome_print on Github](https://github.com/awesome-print/awesome_print)
 
-## ActsAsTaggabble
+## acts-as-taggable-on
 
-If your users will be organizing content in any way, you want tagging. [TBD]
+If your users will be organizing content in any way, you want tagging. ActsAsTaggableOn is pretty
+much the standard Gem for doing this. Tag scopes, user-owned tags, and plenty of options. Even
+helpers for building "popular" tags lists.
+
+```ruby
+# Add and remove a single tag
+@user.tag_list.add("awesome")   # add a single tag. alias for <<
+@user.tag_list.remove("awesome") # remove a single tag
+
+# Add and remove multiple tags in an array
+@user.tag_list.add("awesome", "slick")
+@user.tag_list.remove("awesome", "slick")
+```
+
+**Get It:** [acts-as-taggable-on on Github](https://github.com/mbleigh/acts-as-taggable-on)
 
 ## high_voltage
 
@@ -244,3 +352,33 @@ on a server just for sending emails.
 **Learn More:** [http://sendgrid.com](http://sendgrid.com)
 
 ## paperclip
+
+PaperClip is another go-to Gem that gets a lot of use. If you need files attached to models (like User avatars,
+or post images), this is where PaperClip comes in. Once you have it configured, adding a file attachment
+to  Model is as simple as a migration and a couple lines of code.
+
+```ruby
+# Model
+class User < ActiveRecord::Base
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+end
+
+# Migration
+class AddAvatarColumnsToUsers < ActiveRecord::Migration
+  def up
+    add_attachment :users, :avatar
+  end
+
+  def down
+    remove_attachment :users, :avatar
+  end
+end
+
+# Edit View
+<%= form_for @user, url: users_path, html: { multipart: true } do |form| %>
+  <%= form.file_field :avatar %>
+<% end %>
+```
+
+**Get It:** [paperclip on Github](https://github.com/thoughtbot/paperclip)
