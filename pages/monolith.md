@@ -1,5 +1,5 @@
 ---
-title: Project: Monolith
+title: Project Monolith
 permalink: monolith.html
 layout: default
 ---
