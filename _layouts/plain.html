@@ -19,10 +19,12 @@
         <h1>{{ page.title }}</h1>
         <p class="date">{{ page.date | date: '%B %d, %Y' }}</p>
         <div class="content">{{ content }}</div>
-        {% include share-page.html %}
+        <!-- include share-page.html -->
 
         <div class="share-page">
             Copyright &copy;2017 Mark S. Miller
+            &nbsp;|&nbsp;
+            <a href="{{ site.url }}">BatCountryCoding.com</a>
         </div>
 
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
