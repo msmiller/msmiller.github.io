@@ -1,5 +1,5 @@
 ---
-title: Core Rails Stack
+title: Core Rails Gem Stack
 ---
 
 Setting up a new Rails project requires first putting in place all the core Gems and plugins you like to use. After years
