@@ -66,4 +66,4 @@ As we have seen in the recent election, there is a small army of people already 
 
 The Left will obviously portray this as “state-run news”, but it’s not. It’s state-funded, and it’s bi-partisan. The staff would be from both parties, as well as independents.  Their mission statement would be to “report the news the right way.” There’s good people from both sides who are sick of the current situation. In effect it’s a news service start-up, funded by the government.
 
-This system is entirely doable. I’ve built online systems with many of these capabilities and it’s not that tough. The bigger issue will be scalability because much of the time there will be heavy burst-mode traffic. But the core software system is feasible and a lot less expensive than running s TV station.
+This system is entirely doable. I’ve built online systems with many of these capabilities and it’s not that tough. Heck, I could probably build a working prototype of the system in 4-6 weeks. The bigger issue will be scalability because much of the time there will be heavy burst-mode traffic. But the core software system is feasible and a lot less expensive than running s TV station.
