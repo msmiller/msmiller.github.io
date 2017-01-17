@@ -1,7 +1,7 @@
 ---
 title: Project: Monolith
 permalink: monolith.html
-layout: plain
+layout: page
 ---
 
 # Project: Monolith
