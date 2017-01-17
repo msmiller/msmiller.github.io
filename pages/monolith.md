@@ -1,7 +1,7 @@
 ---
 title: Project: Monolith
 permalink: monolith.html
-layout: plain
+layout: default
 ---
 
 This whole “fake news” thing is as absurd as it is dangerous. What I am submitting here is an approach to turn this situation around.

@@ -15,21 +15,15 @@
   </head>
   <body>
 
-      <section>
-
         <h1>{{ page.title }}</h1>
         <p class="date">{{ page.date | date: '%B %d, %Y' }}</p>
         <div class="content">{{ content }}</div>
         {% include share-page.html %}
 
-      </section>
-      <footer>
-        {% if site.github.is_project_page %}
-        <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
-        {% endif %}
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
+        <div class="share-page">
+            Copyright &copy;2017 Mark S. Miller
+        </div>
+
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 
 
