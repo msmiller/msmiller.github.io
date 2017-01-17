@@ -60,7 +60,7 @@ Some people will only have one main feed of "Top Stories". Some will want to tra
 
 ### Discussion
 
-So, rather than “fact-checking” the existing Main Stream Media, the idea here is to simply replace their function with something faster, less costly, and more accurate. This new service would run 24x7, but since there’s no 24-hour “broadcast” there’s no need to fill 24 hours a day with content (which is kind of how this mess started - opinion was inserted to fill time and bump ratings, and that suddenly became viewed as “news).
+So, rather than “fact-checking” the existing Main Stream Media, the idea here is to simply replace their function with something faster, less costly, and more accurate. This new service would run 24x7, but since there’s no 24-hour “broadcast” there’s no need to fill 24 hours a day with content (which is kind of how this mess started - opinion was inserted to fill time and bump ratings, and that suddenly became viewed as "news").
 
 As we have seen in the recent election, there is a small army of people already out there who are "fact junkies". Who will pore over reams of data to pull out what's important. Who will fact-check everything three times before posting anything. Who are driven to find the truth. This service will bring these people into the news-reporting system. Likewise, there are dozens of really great Live Stream reporters around the country - who will go to anywhere things are happening. Not for fame, but because they're likewise driven to show people watching what's going on. This service will allow these folks to do what they love as professionals, instead of trying to get the job done out-of-pocket.
 
