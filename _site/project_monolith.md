@@ -1,6 +1,6 @@
 ---
 title: Project: Monolith
-permalink: project_monolith
+permalink: project_monolith.html
 ---
 
 This whole “fake news” thing is as absurd as it is dangerous. What I am submitting here is an approach to turn this situation around.
