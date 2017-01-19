@@ -4,7 +4,7 @@ permalink: monolith.html
 layout: plain
 ---
 
-This whole “fake news” thing is as absurd as it is dangerous. What I am submitting here is an approach to turn this situation around.
+This whole “fake news” thing is as absurd as it is dangerous. And it's not going away any time soon. What I am submitting here is an approach to turn this situation around.
 
 The idea comes from the way I get my news. I don’t watch TV news. I follow a small number of Twitter feeds that have proven reliable in delivering facts. For instance, one is a feed that just tracks where gunfire or violence happens around the world. When an alert goes up I quickly find follow-ups from local sources. By the time the “News Media” has the story, a lot of times the news they end up reporting is already quite stale.
 
