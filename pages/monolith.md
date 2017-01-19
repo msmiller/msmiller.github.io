@@ -6,7 +6,7 @@ layout: plain
 
 ### Synopsis
 
-Americans want to know what's going on. They need to know what's going on. They don't want to spend a whole lot of time finding out. And the latest polls show most of the nation no longer trusts the news media. And there are too many people, groups, and corporations who are invested in keeping the current state of the American media exactly where it is. The most efficient and effective solution is a fast flanking move which replaces the primary function of the news media with a new online information-delivery system run in a transparent and non-partisan manner.  At worst it provides the "fact checking" source material that is needed, at best it forces the media to re-invent itself back to goals intended in the Constitution.
+Americans want to know what's going on. They need to know what's going on. They don't want to spend a whole lot of time finding out. The latest polls show most of the nation no longer trusts the news media. And there are too many people, groups, and corporations who are invested in keeping the current state of the American media exactly where it is. The most efficient and effective solution is a fast flanking move which replaces the primary function of the news media with a new online information-delivery system run in a transparent and non-partisan manner.  At worst it provides the "fact checking" source material that is needed, at best it forces the media to re-invent itself back to goals intended in the Constitution.
 
 ### Overview
 
