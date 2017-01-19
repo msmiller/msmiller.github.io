@@ -4,13 +4,15 @@ permalink: monolith.html
 layout: plain
 ---
 
-This whole “fake news” thing is as absurd as it is dangerous. And it's not going away any time soon. What I am submitting here is an approach to turn this situation around.
+### Synopsis
+
+Americans want to know what's going on. They need to know what's going on. They don't want to spend a whole lot of time finding out. And the latest polls show most of the nation no longer trusts the news media. And there are too many people, groups, and corporations who are invested in keeping the current state of the American media exactly where it is. The most efficient and effective solution is a fast flanking move which replaces the primary function of the news media with a new online information-delivery system run in a transparent and non-partisan manner.  At worst it provides the "fact checking" source material that is needed, at best it forces the media to re-invent itself back to goals intended in the Constitution.
+
+### Overview
 
 The idea comes from the way I get my news. I don’t watch TV news. I follow a small number of Twitter feeds that have proven reliable in delivering facts. For instance, one is a feed that just tracks where gunfire or violence happens around the world. When an alert goes up I quickly find follow-ups from local sources. By the time the “News Media” has the story, a lot of times the news they end up reporting is already quite stale.
 
 Most people in the US are connected to the Internet. Even if just on their smart-phones, almost everyone can get online. What I propose is an entirely new online media platform run in a new way. The highlights are as follows:
-
-### Overview
 
 - The service would be entirely devoted to delivering news and only news. Not opinions. Not politics. Not people sitting around on sofas making snide remarks. Actual news of what is happening. The focus would be on accuracy and speed of delivery - get the factual news out to people better and faster than the “real” media can do it.
 * There would be no “anchor” desk. Video segments would be shot either on-location and streamed live, or would be shot at the various satellite offices. The state of technology today removes the need for expensive broadcast studios for doing the news in this manner.
