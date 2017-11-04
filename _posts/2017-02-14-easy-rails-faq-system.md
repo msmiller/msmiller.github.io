@@ -116,7 +116,7 @@ The individual documents will appear as a modal pop-up window as defined below i
 
 This view instantiates the Semantic UI modal popup and defines the JavaScript to load and trigger it. If you'd rather have individual pages load as a regular routes, then you can skip this and change the index view to handle links in that manner.
 
-```
+```ruby
 <div class="ui modal" id="helpModal" style="height:400px; max-height: 400px; overflow:auto;">
   <i class="close icon"></i>
   <div class="content">
@@ -140,7 +140,7 @@ function showHelpModal(p) {
 
 Finally, update your routes to access the controller and set up a default `/help` route.
 
-```
+```ruby
 get 'helppages/index'
 get 'helppages/content'
 get 'help' => 'helppages#index'
