@@ -10,30 +10,30 @@ The implementation is pretty simple. One controller, 3 views, and an initializer
 
 ```
 - root
-	- app
-		- controllers
-			- cover_letters_controller.rb
-		- views
-			- helppages
-				- _modal.html.erb
-				- content.html.erb
-				- index.html.erb
-		- config
-			- initializers
-				- help_pages.rb
-	- static
-		- docs
-			- section1
-				- doc1.md
-				- doc2.md
-				- ...
-			- section2
-			- section3
+  - app
+    - controllers
+      - cover_letters_controller.rb
+    - views
+      - helppages
+        - _modal.html.erb
+        - content.html.erb
+        - index.html.erb
+    - config
+      - initializers
+        - help_pages.rb
+  - static
+    - docs
+      - section1
+        - doc1.md
+        - doc2.md
+        - ...
+      - section2
+      - section3
 ```
 
 #### config/initializers/openresume/help_pages.rb
 
-The initializer sets up your document path and initializes the sections and pages in each section. 
+The initializer sets up your document path and initializes the sections and pages in each section.
 
 ```ruby
 HELP_PATH = "static/docs"
@@ -47,7 +47,7 @@ end
 
 #### The Controller
 
-The controller is pretty basic. The `index` method just loads a view which shows the sections and pages. Most of the work is done in the view. The `content` method simply loads the selected Markdown file and returns the rendered HTML over AJAX. Again,  the goal here is simplicity and ease of maintenance. 
+The controller is pretty basic. The `index` method just loads a view which shows the sections and pages. Most of the work is done in the view. The `content` method simply loads the selected Markdown file and returns the rendered HTML over AJAX. Again,  the goal here is simplicity and ease of maintenance.
 
 ```ruby
 class HelppagesController < ApplicationController
@@ -69,7 +69,7 @@ class HelppagesController < ApplicationController
   def self.format_page_name(s, p)
     p.gsub("#{HELP_PATH}#{s}/", "").gsub(".md", "").gsub("___", "?").gsub("_", " ").gsub(".md", "").split("/").last
   end
-  
+
 end
 
 ```
@@ -77,7 +77,7 @@ end
 
 #### .../views/helppages/index.html.erb
 
-The `index` view iterates over the `HELP_SECTIONS` and shows the list of documents in each. Each document link kicks out to `showHelpModal()` which loads the AJAX content into an modal popup. This example uses Semantic UI, but 
+The `index` view iterates over the `HELP_SECTIONS` and shows the list of documents in each. Each document link kicks out to `showHelpModal()` which loads the AJAX content into an modal popup. This example uses Semantic UI, but
 
 ```ruby
 <% title "Help" %>
