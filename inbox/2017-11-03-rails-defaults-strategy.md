@@ -15,7 +15,6 @@ And of course, this all has to get mapped across the various deploy environments
 
 The approach described here uses three Gems which work well together to provide a very flexible and powerful strategy for managing all these settings.
 
-
 ### dotenv-rails
 
 [https://github.com/bkeepers/dotenv](https://github.com/bkeepers/dotenv)
@@ -53,10 +52,13 @@ So now you have global settings, environments, and credentials handled and in a 
 
 _**NOTE:** You don't want to check these files into your version control since they'll usually have credentials that you don't want being public._
 
-
 ### settingslogic
 
 [https://github.com/binarylogic/settingslogic](https://github.com/binarylogic/settingslogic)
+
+SettingsLogic is a really slick and useful Gem which loads a set up configuration data from a YAML file and then provides it as a model. This means that the model can also massage the data as needed - for instance, if a configuration hash is to be provided  to a form SELECT in a specific way.
+
+The files you'll add, in addition to the Gem itself will be something like the following. I like to split out the SettingsLogic classes and settings files from everything else so things don't get confused.
 
 ```
 - root
@@ -77,6 +79,57 @@ _**NOTE:** You don't want to check these files into your version control since t
       - foo
 ```
 
-I like to use the `facade` settings for defining things like what icon to use for different things in the system, as well as branding attributes and the like. This way everything that's related to the look and feel of the App is more or less in one place. Also, since SettingsLogic actually provides a model, it makes it possible to create helper-like functions to do things like condition settings for use in forms.
+I like to use the `facade` settings for defining things like what icon to use for different things in the system, as well as branding attributes and the like. This way everything that's related to the look and feel of the App is more or less in one place. 
+
+So, a SettingsLogic model looks something like this:
+
+```ruby
+class Settingslogic::Defaults < Settingslogic
+  source "#{Rails.root}/config/settingslogic/common/defaults.yml"
+  namespace Rails.env
+end
+```
+
+And if your YAML file looks like:
+
+```yaml
+defaults: &defaults
+  settings:
+    foo:       bar
+    ack:       oop
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+```
+
+... then you would be able to get at the settings as ...
+
+```ruby
+Settingslogic.settings.foo # => 'bar'
+Settingslogic.settings.ack # => 'oop'
+```
+
+Note that SettingsLogic already handles development, test, and production environments. However, when you're using Heroku your "staging" environment is often configured as "production". This is where the `INSTANCE` setting from your Dotenv variables comes into play.
+
+And since SettingsLogic provides configuration as a model, you can add in functions to make it more helpful - and to save having these little utility functions spread all over the rest of your code.
+
+```ruby
+class Settingslogic::Defaults < Settingslogic
+  source "#{Rails.root}/config/settingslogic/common/defaults.yml"
+  namespace Rails.env
+  
+  def is_foo_and_not_ack?
+	  (foo && !ack)
+  end
+  
+end
+```
+
 
 ### default_value_for
