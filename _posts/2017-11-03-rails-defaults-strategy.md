@@ -22,7 +22,7 @@ The approach described here uses three Gems which work well together to provide 
 So let's "start at the bottom" as it were. **Dotenv** is a nice little Gem which automatically loads environment files before your server(s) start up. This mirrors the configuration variables that Heroku uses, so it's a nice way to keep consistent mechanisms for these settings.
 
 ```
-- root
+- root/
   - .env.development
   - .env.test
   - .env.foo
@@ -61,22 +61,22 @@ SettingsLogic is a really slick and useful Gem which loads a set up configuratio
 The files you'll add, in addition to the Gem itself will be something like the following. I like to split out the SettingsLogic classes and settings files from everything else so things don't get confused.
 
 ```
-- root
-  - app
-    - models
-      - settingslogic
-      - defaults.rb
-      - facade.rb
-      - instance.rb
-    - config
-      - settingslogic
-        - common
+- root/
+  - app/
+    - models/
+      - settingslogic/
+        - defaults.rb
+        - facade.rb
+        - instance.rb
+    - config/
+      - settingslogic/
+        - common/
           - defaults.yml
-            - dev
+            - dev/
               - instance.yml
               - facade.yml
-            - test
-            - foo
+            - test/
+            - foo/
 ```
 
 I like to use the `facade` settings for defining things like what icon to use for different things in the system, as well as branding attributes and the like. This way everything that's related to the look and feel of the App is more or less in one place. 
