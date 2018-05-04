@@ -81,3 +81,4 @@ Adding JWT to my Rails app wasn't that tough either and it only took another eve
 
 And I do think I'll transition my active JS code to VueJS. I really wish there was tighter coupling to Rails, like what Hyperloop had promised. Or at least a "preferred way" to integrate Rails and VueJS. Maybe in time. 
 
+And, at the end of the day, I realized there's nothing wrong with Rails. With 5.2 there's WebPacker and ActiveStorage which makes it a really solid platform. No, it's not as quick and responsive as a PWA ... but you can build a PWA driven and served by a Rails back-end. So you can use Rails for your account admin, content creation, and settings and what-not (where you need lots of forms that don't really demand high performance), and then use PWA's and Apps for your day-to-day functionality ... and Rails can be either the application server or the object broker, depending on what it's talking to. 
