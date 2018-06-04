@@ -20,7 +20,7 @@ The bigger challenge is how the two companies can make developers feel comfortab
 
 For instance, if I’m building a “calendar SAAS app” then I’m competing with Microsoft Office at some level. If I someday want my little company to be bought - maybe by Microsoft - how comfortable am I hosting the code on servers they have control over? Not very. Sure, I’d have legal grounds to sue if they stole my code, but who can afford more lawyers them or me?
 
-The fallout from today’s news is large migration of folks heading to [Gitlab]. I’ll probably spin up an account there this week (once their load stabilizes ... they’re getting flooded today) and test-drive it on a project. [Bitbucket] is another option, so it [Beanstalk]. 
+The fallout from today’s news is large migration of folks heading to [Gitlab](http://gitlab.com/). I’ll probably spin up an account there this week (once their load stabilizes ... they’re getting flooded today) and test-drive it on a project. [Bitbucket](https://bitbucket.org/) is another option, so it [Beanstalk](https://beanstalkapp.com/). 
 
 I really like Github and have used them for close to a decade. I don’t want to move all my stuff someplace else. But I have serious concerns about hosting proprietary code on a service that is now owned by Microsoft. Maybe this paranoia is more of a reflection of the times, but it’s there. 
 
