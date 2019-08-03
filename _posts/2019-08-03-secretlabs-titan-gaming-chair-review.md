@@ -40,4 +40,7 @@ The chair can tilt back almost 60 degrees for naps. The wheels roll very quietly
 
 The Secret Lab chair would be a bargain at full price. But when on sale it’s silly to buy a $1000 chair. Especially if you’re over 6-feet tall - most “standard” chairs are too low for taller people. I’m at my desk up to 12 hours a day and after a couple weeks using the Titan my back feels noticeably better because my posture is better in the chair.
 
+You can order direct from [SecretLab](https://https://secretlab.co/){:target="_blank"}. 
+
+
 
