@@ -1,5 +1,6 @@
 ---
 title: Quick-and-Easy Rails Help/FAQ System
+excerpt: A complete help/faq system in about 100 lines of code. There may be more elegant ways to accomplish this, but for quickly generating internal documentation this will get the job done. All your documentation is in easy to edit Markdown files and you can re-arrange things by simply moving things between folders on the desktop and then pushing the code back to git.
 ---
 
 Any web application needs a help or FAQ section. There has to be documentation. At the same time, you as the developer don't want to spend a ton of time building this part of the code, or have to learn a whole new kind of syntax for your documents. Some FAQ gems rely on ActiveRecord but - seriously - how often does your documentation change? And when it changes, it's usually in relation to a code push, right? So what I prefer is a flat-file approach and Markdown formatted documents. That keeps things simple and easy to maintain.

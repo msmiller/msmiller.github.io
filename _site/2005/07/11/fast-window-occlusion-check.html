@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Fast Window Overlap Checking Algorithm | Bat Country Coding</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=e43a7f79d2960a0ba7c86584bb47298a99d2ae61">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Oswald|Special+Elite" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://batcountrycoding.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://batcountrycoding.com/favicon_ani.ico" type="image/x-icon">
+    <meta property="og:image" content="http://localhost:4000/assets/images/batcountry1.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="631" />
+<meta property="og:image:height" content="298" />
+<meta property="og:title" content="Fast Window Overlap Checking Algorithm" />
+<meta property="og:description" content="The algorithm described here is one I wrote back in 1988 for a graphics workstation product. It relies on some interesting relationships between the sign of the result of subtracting opposite sides of two rectangles. By taking advantage of this, it is possible to write few lines of C code which will compile down to 20 or fewer assembly instructions." />
+<link rel="image_src" href="http://localhost:4000/assets/images/batcountry1.jpg" />
+
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <!--
+@Author: msmiller
+@Date:   2019-08-15 15:14:12
+@Last Modified by:   msmiller
+@Last Modified time: 2019-08-15 15:53:52
+
+Copyright (c) 2017-2018 Sharp Stone Codewerks / Mark S. Miller
+-->
+
+<header style="border-right: 1px solid #ddd;">
+  <center><a href="http://localhost:4000"><img src="/assets/images/batcountry1.jpg"></a></center>
+  <h1 id="sitename"><a href="http://localhost:4000">Bat Country Coding</a></h1>
+  <h1 id="sitedesc">A Technology Blog<span class="blinking-cursor">|</span></h1>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="/posts.html">All Posts</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://sharpstonecodewerks.com" target="_away">Sharp Stone Codewerks</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.abstretta.com" target="_away">Abstretta.com</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.bibliogrify.com" target="_away">Bibliogrify.com</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://github.com/msmiller" target="_away">Github</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://www.linkedin.com/in/msmiller" target="_away">LinkedIn</a></p>
+
+  
+
+  
+
+  
+</header>
+
+      <section>
+
+        <h1>Fast Window Overlap Checking Algorithm</h1>
+        <p class="date">July 11, 2005</p>
+        <div class="content"><p><em>From deep in my archives …</em></p>
+
+<p>Many algorithms to check if two windows overlap (a very common activity in window system and interface design) rely on doing multiple comparisons of the positions of the sides of the two rectangular areas in question. This is usually fine for most instances, especially in these days of multi-gigahertz desktop PC’s. But sometimes you need to do so many such comparisons that speed becomes the paramount concern. And sometimes you do not have a super fast processor to rely on - such as on small hand-held devices or cell-phones.</p>
+
+<p>The algorithm described here is one I wrote back in 1988 for a graphics workstation product. It relies on some interesting relationships between the sign of the result of subtracting opposite sides of two rectangles. By taking advantage of this, it is possible to write few lines of C code which will compile down to 20 or fewer assembly instructions.</p>
+
+<p>Simply put, if you subtract opposite sides of two rectangles the signs of the results will be the same if they do not overlap along that axis. So in pseudocode that comes out to:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if ( (sign(top1 - bottom2) != sign(bottom1 - top2)) &amp;&amp;
+  (sign(left1 - right2) != sign(right1 - left2)) ) return(1);
+</code></pre></div></div>
+
+<p>This can be further optimized by using the XOR function, which allows the entire algorithm to be reduced to a 1-line preprocessor macro which has only one logical comparison - everything else is integer or bit-wise math. In this case all we are trying to do is get the high-order bit (which determines sign of the integer) to be set based on the subtractions, and then test it for the occlusion.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef struct {
+  int t, l, r, b;
+} rect;
+
+#define test_olap (_r1, _r2)
+  ( ( ( ( (_r1.t - _r2.b) ^ (_r1.b - _r2.t) ) &amp;&amp;
+  ( (_r1.l - _r2.r) ^ (_r1.r - _r2.l) ) ) &lt; 0) ? 1 : 0)
+</code></pre></div></div>
+
+<p>Further optimizations could be done for a C/C++ coded version for early rejection based a negative return from the top/bottom or left/right comparison. But the gain would be negligible since that would require kicking out to logical operations and comparisons. The macro above compiled down to around 20 instructions on SPARC/680X0 series chips, and loading the registers for an early compare would not shave much off that.</p>
+</div>
+        <div class="share-page">
+    Share this on &rarr;
+    <a href="https://twitter.com/intent/tweet?text=Fast Window Overlap Checking Algorithm&url=http://localhost:4000/2005/07/11/fast-window-occlusion-check.html" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2005/07/11/fast-window-occlusion-check.html" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+    <a href="https://plus.google.com/share?url=http://localhost:4000/2005/07/11/fast-window-occlusion-check.html" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+</div>
+
+
+      </section>
+      <footer>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+
+  
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-145823739-2");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  
+  </body>
+</html>

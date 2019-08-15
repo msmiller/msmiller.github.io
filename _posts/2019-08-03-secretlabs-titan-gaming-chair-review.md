@@ -1,5 +1,6 @@
 ---
-title: SecretLabs “Titan” Gaming Chair Review
+title: (REVIEW) SecretLabs “Titan” Gaming Chair
+excerpt: The Secret Lab chair would be a bargain at full price. But when on sale it’s silly to buy a $1000 chair. Especially if you’re over 6-feet tall - most 'standard' chairs are too low for taller people. I’m at my desk up to 12 hours a day and after a couple weeks using the Titan my back feels noticeably better because my posture is better in the chair.
 ---
 
  ![]({{ site.url }}/assets/postimages/secretlabs.jpg "My Chair in the Wild")

@@ -1,0 +1,39 @@
+<!--
+@Author: msmiller
+@Date:   2019-08-15 15:14:12
+@Last Modified by:   msmiller
+@Last Modified time: 2019-08-15 15:53:52
+
+Copyright (c) 2017-2018 Sharp Stone Codewerks / Mark S. Miller
+-->
+
+<header style="border-right: 1px solid #ddd;">
+  <center><a href="{{ site.url }}"><img src="/assets/images/batcountry1.jpg"></a></center>
+  <h1 id="sitename"><a href="{{ site.url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
+  <h1 id="sitedesc">{{ site.description | default: site.github.project_tagline }}<span class="blinking-cursor">|</span></h1>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="/posts.html">All Posts</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://sharpstonecodewerks.com" target="_away">Sharp Stone Codewerks</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.abstretta.com" target="_away">Abstretta.com</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.bibliogrify.com" target="_away">Bibliogrify.com</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://github.com/msmiller" target="_away">Github</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://www.linkedin.com/in/msmiller" target="_away">LinkedIn</a></p>
+
+  {% if false && site.github.is_project_page %}
+    <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ github_name }}</small></a></p>
+  {% endif %}
+
+  {% if site.github.is_user_page %}
+    <p class="view"><img src="/assets/images/chevron.png"> <a href="{{ site.github.owner_url }}">GitHub Profile</a></p>
+  {% endif %}
+
+  {% if site.show_downloads %}
+    <ul>
+      <li><a href="{{ site.github.zip_url }}">Download <strong>ZIP File</strong></a></li>
+      <li><a href="{{ site.github.tar_url }}">Download <strong>TAR Ball</strong></a></li>
+      <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
+    </ul>
+  {% endif %}
+</header>

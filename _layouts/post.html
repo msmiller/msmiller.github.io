@@ -13,36 +13,13 @@
     <![endif]-->
     <link rel="shortcut icon" href="http://batcountrycoding.com/favicon.ico" type="image/x-icon">
     <link rel="icon" href="http://batcountrycoding.com/favicon_ani.ico" type="image/x-icon">
-    {% include metatags.html %}
+    {% include metatags_post.html %}
   </head>
   <body>
     <div class="wrapper">
-      <header style="border-right: 1px solid #ddd;">
-        <center><a href="{{ site.url }}"><img src="/assets/images/batcountry1.jpg"></a></center>
-        <h1 id="sitename"><a href="{{ site.url }}">{{ site.title | default: site.github.repository_name }}</a></h1>
-        <h1 id="sitedesc">{{ site.description | default: site.github.project_tagline }}<span class="blinking-cursor">|</span></h1>
-        <hr>
-        <p class="view">&raquo; <a href="/posts.html">All Posts</a></p>
-        <hr>
-        <p class="view">&raquo; <a href="http://www.sharpstonecodewerks.com" target="_away">Sharp Stone Codewerks</a></p>
-        <p class="view">&raquo; <a href="https://www.linkedin.com/in/msmiller" target="_away">LinkedIn</a></p>
 
-        {% if site.github.is_project_page %}
-          <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ github_name }}</small></a></p>
-        {% endif %}
+      {% include sidebar.html %}
 
-        {% if site.github.is_user_page %}
-          <p class="view">&raquo; <a href="{{ site.github.owner_url }}">GitHub Profile</a></p>
-        {% endif %}
-
-        {% if site.show_downloads %}
-          <ul>
-            <li><a href="{{ site.github.zip_url }}">Download <strong>ZIP File</strong></a></li>
-            <li><a href="{{ site.github.tar_url }}">Download <strong>TAR Ball</strong></a></li>
-            <li><a href="{{ site.github.repository_url }}">View On <strong>GitHub</strong></a></li>
-          </ul>
-        {% endif %}
-      </header>
       <section>
 
         <h1>{{ page.title }}</h1>
@@ -52,7 +29,7 @@
 
       </section>
       <footer>
-        {% if site.github.is_project_page %}
+        {% if false && site.github.is_project_page %}
         <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
         {% endif %}
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>

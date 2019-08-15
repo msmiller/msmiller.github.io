@@ -1,5 +1,6 @@
 ---
 title: Microsoft Buying Github - The Elephant In The Room
+excerpt: From a pure 'technology' standpoint, this looks fine. Microsoft offers a lot of money and a big developer base to make Git the dominant version control system. And it’s a solid power move by Microsoft to buy up the dominant player in the space. It sends a sound message to developers that they’re still in the game.
 ---
 
  ![]({{ site.url }}/assets/postimages/darthvader.jpg "Vader")

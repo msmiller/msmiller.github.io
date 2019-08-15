@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Quick-and-Easy Rails Help/FAQ System | Bat Country Coding</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=e43a7f79d2960a0ba7c86584bb47298a99d2ae61">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Oswald|Special+Elite" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://batcountrycoding.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://batcountrycoding.com/favicon_ani.ico" type="image/x-icon">
+    <meta property="og:image" content="http://localhost:4000/assets/images/batcountry1.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="631" />
+<meta property="og:image:height" content="298" />
+<meta property="og:title" content="Quick-and-Easy Rails Help/FAQ System" />
+<meta property="og:description" content="A complete help/faq system in about 100 lines of code. There may be more elegant ways to accomplish this, but for quickly generating internal documentation this will get the job done. All your documentation is in easy to edit Markdown files and you can re-arrange things by simply moving things between folders on the desktop and then pushing the code back to git." />
+<link rel="image_src" href="http://localhost:4000/assets/images/batcountry1.jpg" />
+
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <!--
+@Author: msmiller
+@Date:   2019-08-15 15:14:12
+@Last Modified by:   msmiller
+@Last Modified time: 2019-08-15 15:53:52
+
+Copyright (c) 2017-2018 Sharp Stone Codewerks / Mark S. Miller
+-->
+
+<header style="border-right: 1px solid #ddd;">
+  <center><a href="http://localhost:4000"><img src="/assets/images/batcountry1.jpg"></a></center>
+  <h1 id="sitename"><a href="http://localhost:4000">Bat Country Coding</a></h1>
+  <h1 id="sitedesc">A Technology Blog<span class="blinking-cursor">|</span></h1>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="/posts.html">All Posts</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://sharpstonecodewerks.com" target="_away">Sharp Stone Codewerks</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.abstretta.com" target="_away">Abstretta.com</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.bibliogrify.com" target="_away">Bibliogrify.com</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://github.com/msmiller" target="_away">Github</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://www.linkedin.com/in/msmiller" target="_away">LinkedIn</a></p>
+
+  
+
+  
+
+  
+</header>
+
+      <section>
+
+        <h1>Quick-and-Easy Rails Help/FAQ System</h1>
+        <p class="date">February 14, 2017</p>
+        <div class="content"><p>Any web application needs a help or FAQ section. There has to be documentation. At the same time, you as the developer don’t want to spend a ton of time building this part of the code, or have to learn a whole new kind of syntax for your documents. Some FAQ gems rely on ActiveRecord but - seriously - how often does your documentation change? And when it changes, it’s usually in relation to a code push, right? So what I prefer is a flat-file approach and Markdown formatted documents. That keeps things simple and easy to maintain.</p>
+
+<h4 id="the-files">The Files</h4>
+
+<p>The implementation is pretty simple. One controller, 3 views, and an initializer - and add a new entry to <code class="highlighter-rouge">config/routes.rb</code>. Everything else is static document files which can be easily modified and re-arranged as your system grows or changes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- root
+  - app
+    - controllers
+      - cover_letters_controller.rb
+    - views
+      - helppages
+        - _modal.html.erb
+        - content.html.erb
+        - index.html.erb
+    - config
+      - initializers
+        - help_pages.rb
+  - static
+    - docs
+      - section1
+        - doc1.md
+        - doc2.md
+        - ...
+      - section2
+      - section3
+</code></pre></div></div>
+
+<h4 id="configinitializersopenresumehelp_pagesrb">config/initializers/openresume/help_pages.rb</h4>
+
+<p>The initializer sets up your document path and initializes the sections and pages in each section.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">HELP_PATH</span> <span class="o">=</span> <span class="s2">"static/docs"</span>
+<span class="no">HELPDIR</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="no">HELP_PATH</span> <span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">"/"</span> <span class="c1"># don't miss adding "/"</span>
+<span class="no">HELP_SECTIONS</span> <span class="o">=</span> <span class="no">Dir</span><span class="p">[</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">HELPDIR</span><span class="p">,</span> <span class="s1">'**'</span><span class="p">)].</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">f</span><span class="p">.</span><span class="nf">sub!</span><span class="p">(</span><span class="no">HELPDIR</span><span class="p">,</span> <span class="s2">""</span><span class="p">)}</span>
+<span class="no">HELP_PAGES</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="no">HELP_SECTIONS</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
+  <span class="no">HELP_PAGES</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="no">Dir</span><span class="p">[</span><span class="no">File</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="no">HELPDIR</span> <span class="o">+</span> <span class="s1">'/'</span><span class="p">,</span>  <span class="n">s</span><span class="p">,</span> <span class="s1">'**'</span><span class="p">)].</span><span class="nf">map</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="n">f</span><span class="p">.</span><span class="nf">sub!</span><span class="p">(</span><span class="no">HELPDIR</span><span class="p">,</span> <span class="no">HELP_PATH</span> <span class="p">)}</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h4 id="the-controller">The Controller</h4>
+
+<p>The controller is pretty basic. The <code class="highlighter-rouge">index</code> method just loads a view which shows the sections and pages. Most of the work is done in the view. The <code class="highlighter-rouge">content</code> method simply loads the selected Markdown file and returns the rendered HTML over AJAX. Again,  the goal here is simplicity and ease of maintenance.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HelppagesController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+
+  <span class="c1"># Show the index of all help/faq</span>
+  <span class="k">def</span> <span class="nf">index</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Render a specific page as plain AJAX/HTML</span>
+  <span class="k">def</span> <span class="nf">content</span>
+    <span class="n">md</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:p</span><span class="p">]))</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="no">Redcarpet</span><span class="o">::</span><span class="no">Markdown</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Redcarpet</span><span class="o">::</span><span class="no">Render</span><span class="o">::</span><span class="no">HTML</span><span class="p">,</span> <span class="ss">autolink: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">tables: </span><span class="kp">true</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="n">md</span><span class="p">)</span>
+    <span class="n">render</span> <span class="ss">:plain</span> <span class="o">=&gt;</span> <span class="n">html</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Create a human readable page name from the file name.</span>
+  <span class="c1"># '___' is used to indicate a question-mark (useful for FAQ)</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">format_page_name</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">p</span><span class="p">)</span>
+    <span class="nb">p</span><span class="p">.</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="no">HELP_PATH</span><span class="si">}#{</span><span class="n">s</span><span class="si">}</span><span class="s2">/"</span><span class="p">,</span> <span class="s2">""</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">".md"</span><span class="p">,</span> <span class="s2">""</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">"___"</span><span class="p">,</span> <span class="s2">"?"</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">).</span><span class="nf">gsub</span><span class="p">(</span><span class="s2">".md"</span><span class="p">,</span> <span class="s2">""</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s2">"/"</span><span class="p">).</span><span class="nf">last</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+
+</code></pre></div></div>
+
+<h4 id="viewshelppagesindexhtmlerb">…/views/helppages/index.html.erb</h4>
+
+<p>The <code class="highlighter-rouge">index</code> view iterates over the <code class="highlighter-rouge">HELP_SECTIONS</code> and shows the list of documents in each. Each document link kicks out to <code class="highlighter-rouge">showHelpModal()</code> which loads the AJAX content into an modal popup. This example uses Semantic UI, but</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="sx">% title </span><span class="s2">"Help"</span> <span class="o">%&gt;</span>
+<span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;&lt;</span><span class="sx">%= yield(:title) %&gt;&lt;/h1&gt;
+
+&lt;%=</span> <span class="n">render</span> <span class="ss">:partial</span> <span class="o">=&gt;</span> <span class="s2">"modal"</span> <span class="o">%&gt;</span>
+
+<span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"ui relaxed divided list"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="sx">% HELP_SECTIONS.each </span><span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="o">-</span><span class="sx">%&gt;
+
+  &lt;div class="item"&gt;</span><span class="o">&lt;</span><span class="n">i</span> <span class="k">class</span><span class="o">=</span><span class="s2">"folder icon"</span><span class="o">&gt;&lt;</span><span class="sr">/i&gt;&lt;div class="content"&gt;
+
+      &lt;div class="header"&gt;&lt;%= s.upcase.gsub("_", " ") %&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+      <span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"ui relaxed divided list"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="sx">% HELP_PAGES[s].each </span><span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="o">-</span><span class="sx">%&gt;
+          &lt;div class="item"&gt;</span><span class="o">&lt;</span><span class="n">i</span> <span class="k">class</span><span class="o">=</span><span class="s2">"file blue icon"</span><span class="o">&gt;&lt;</span><span class="sr">/i&gt;&lt;div class="content"&gt;
+            &lt;%= link_to HelppagesController::format_page_name(s, p),  "javascript:showHelpModal('</span><span class="si">#{</span><span class="nb">p</span><span class="si">}</span><span class="sr">');" %&gt;
+          &lt;/</span><span class="n">div</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
+        &lt;% end -%&gt;
+      &lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="sr">/div&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="sx">% end </span><span class="o">-</span><span class="sx">%&gt;
+&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Using Semantic UI will yield an index that looks like this:</p>
+
+<p><img src="http://localhost:4000/assets/postimages/helppages.png" /></p>
+
+<p>The individual documents will appear as a modal pop-up window as defined below in <code class="highlighter-rouge">_modal.html.erb</code>.</p>
+
+<h4 id="viewshelppages_modalhtmlerb">…/views/helppages/_modal.html.erb</h4>
+
+<p>This view instantiates the Semantic UI modal popup and defines the JavaScript to load and trigger it. If you’d rather have individual pages load as a regular routes, then you can skip this and change the index view to handle links in that manner.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">div</span> <span class="k">class</span><span class="o">=</span><span class="s2">"ui modal"</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"helpModal"</span> <span class="n">style</span><span class="o">=</span><span class="s2">"height:400px; max-height: 400px; overflow:auto;"</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">i</span> <span class="k">class</span><span class="o">=</span><span class="s2">"close icon"</span><span class="o">&gt;&lt;</span><span class="sr">/i&gt;
+  &lt;div class="content"&gt;
+    &lt;div class="description" id="helpcontent"&gt;
+    &lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/div&gt;
+&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">script</span> <span class="n">type</span><span class="o">=</span><span class="s2">"text/javascript"</span><span class="o">&gt;</span>
+<span class="n">function</span> <span class="n">showHelpModal</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span> <span class="p">{</span>
+  <span class="err">$</span><span class="p">(</span> <span class="s1">'#helpcontent'</span> <span class="p">).</span><span class="nf">load</span><span class="p">(</span> <span class="s2">"/helppages/content?p="</span> <span class="o">+</span> <span class="nb">p</span> <span class="p">);</span>
+  <span class="err">$</span><span class="p">(</span> <span class="s1">'#helpModal'</span> <span class="p">).</span><span class="nf">modal</span><span class="p">({</span>
+    <span class="ss">offset: </span><span class="mi">0</span><span class="p">,</span>
+    <span class="ss">inverted: </span><span class="kp">true</span>
+  <span class="p">}).</span><span class="nf">modal</span><span class="p">(</span><span class="s1">'show'</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="o">&lt;</span><span class="sr">/script&gt;
+</span></code></pre></div></div>
+
+<h4 id="configroutesrb">…/config/routes.rb</h4>
+
+<p>Finally, update your routes to access the controller and set up a default <code class="highlighter-rouge">/help</code> route.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get</span> <span class="s1">'helppages/index'</span>
+<span class="n">get</span> <span class="s1">'helppages/content'</span>
+<span class="n">get</span> <span class="s1">'help'</span> <span class="o">=&gt;</span> <span class="s1">'helppages#index'</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>And there you have it. A complete help/faq system in about 100 lines of code. There may be more elegant ways to accomplish this, but for quickly generating internal documentation this will get the job done. All your documentation is in easy to edit Markdown files and you can re-arrange things by simply moving things between folders on the desktop and then pushing the code back to git.</p>
+</div>
+        <div class="share-page">
+    Share this on &rarr;
+    <a href="https://twitter.com/intent/tweet?text=Quick-and-Easy Rails Help/FAQ System&url=http://localhost:4000/2017/02/14/easy-rails-faq-system.html" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2017/02/14/easy-rails-faq-system.html" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+    <a href="https://plus.google.com/share?url=http://localhost:4000/2017/02/14/easy-rails-faq-system.html" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+</div>
+
+
+      </section>
+      <footer>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+
+  
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-145823739-2");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  
+  </body>
+</html>

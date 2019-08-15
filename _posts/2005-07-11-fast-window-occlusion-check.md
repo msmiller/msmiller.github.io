@@ -1,5 +1,6 @@
 ---
 title: Fast Window Overlap Checking Algorithm
+excerpt: The algorithm described here is one I wrote back in 1988 for a graphics workstation product. It relies on some interesting relationships between the sign of the result of subtracting opposite sides of two rectangles. By taking advantage of this, it is possible to write few lines of C code which will compile down to 20 or fewer assembly instructions.
 ---
 
 _From deep in my archives ..._

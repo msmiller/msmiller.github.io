@@ -1,5 +1,6 @@
 ---
 title: A Strategy For Configs And Defaults In Rails
+excerpt: The approach described here uses three Gems which work well together to provide a very flexible and powerful strategy for managing all an app's settings.
 ---
 
 There's a plethora of configurations and default settings that are needed in a Rails App. Some examples include:

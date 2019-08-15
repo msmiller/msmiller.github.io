@@ -1,5 +1,6 @@
 ---
 title: So Many Frameworks, So Little Time
+excerpt: At the end of the day, I realized there's nothing wrong with Rails. With 5.2 there's WebPacker and ActiveStorage which makes it a really solid platform. No, it's not as quick and responsive as a PWA ... but you can build a PWA driven and served by a Rails back-end. So you can use Rails for your account admin, content creation, and settings and what-not (where you need lots of forms that don't really demand high performance), and then use PWA's and Apps for your day-to-day functionality ... and Rails can be either the application server or the object broker, depending on what it's talking to. 
 ---
 
 I spent a little time this week diving back into JavaScript frameworks. The funny thing is: Rails (for a dinosaur like me, anyway) is still the fastest way to go from "I got an idea" to deploying something on a server. Maybe because I'm used to it, maybe because it jives with how I work, maybe because it's built to be able to do just that. Whatever the reason, Rails will still be my Main Axe.
