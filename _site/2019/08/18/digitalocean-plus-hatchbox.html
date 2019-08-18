@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>DigitalOcean + HatchBox | Bat Country Coding</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=008a96ad83eeb4cf3ab33505f2dce35bb052af0a">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Oswald|Special+Elite" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://batcountrycoding.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://batcountrycoding.com/favicon_ani.ico" type="image/x-icon">
+    <meta property="og:image" content="http://localhost:4000/assets/images/batcountry1.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="631" />
+<meta property="og:image:height" content="298" />
+<meta property="og:title" content="DigitalOcean + HatchBox" />
+<meta property="og:description" content="HatchBox/DigitalOcean is a great combination to launch products on. Whether prototypes or client demos. But it’s also strong enough to get a Rails-based venture into profitability." />
+<link rel="image_src" href="http://localhost:4000/assets/images/batcountry1.jpg" />
+
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <!--
+@Author: msmiller
+@Date:   2019-08-15 15:14:12
+@Last Modified by:   msmiller
+@Last Modified time: 2019-08-15 15:53:52
+
+Copyright (c) 2017-2018 Sharp Stone Codewerks / Mark S. Miller
+-->
+
+<header style="border-right: 1px solid #ddd;">
+  <center><a href="http://localhost:4000"><img src="/assets/images/batcountry1.jpg"></a></center>
+  <h1 id="sitename"><a href="http://localhost:4000">Bat Country Coding</a></h1>
+  <h1 id="sitedesc">A Technology Blog<span class="blinking-cursor">|</span></h1>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="/posts.html">All Posts</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://sharpstonecodewerks.com" target="_away">Sharp Stone Codewerks</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.abstretta.com" target="_away">Abstretta.com</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.bibliogrify.com" target="_away">Bibliogrify.com</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://github.com/msmiller" target="_away">Github</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://www.linkedin.com/in/msmiller" target="_away">LinkedIn</a></p>
+
+  
+
+  
+
+  
+</header>
+
+      <section>
+
+        <h1>DigitalOcean + HatchBox</h1>
+        <p class="date">August 18, 2019</p>
+        <div class="content"><p><img src="http://localhost:4000/assets/postimages/dohb.png" alt="" /></p>
+
+<p>I’ve been hosting my Rails projects on <a href="https://www.heroku.com/" target="_blank">Heroku</a> for years now. It’s a great service for a developer because it insulates you from a lot of the IT/Operations issues involved with deploying and managing a Rails app. But it can get expensive, especially when you want to start layering on background processing and multiple instances. Overall Heroku has been good to me over the years but I’ve been looking for something that was just as convenient but more affordable and bit more flexible.</p>
+
+<p>A lot of solutions which offer “1 click deploy” like Heroku rely on technologies such as Docker. And these are fine, but they’re also heavy and I find them slow to spool up and to deploy. Plus I really didn’t want to get saddled with yet another technology suite I would be forced to learn.</p>
+
+<p>Then I came across a Reddit post talking about a service called <a href="https://www.hatchbox.io/" target="_blank">HatchBox</a> by Chris Oliver from GoRails. He describes the system as: <em>“Now, Hatchbox isn’t designed to replace Heroku or anything like that. If you want truly hands-off, you’ll have to pay for Heroku or something similar. If you want something cheap and easy to use, but don’t mind running your own servers, then Hatchbox will hopefully be perfect for you.”</em> Which sounded like exactly what I wanted. Any big projects will eventually be moved to <a href="https://www.engineyard.com/" target="_blank">Engine Yard</a> as I used them for many years at an enterprise-level start-up. But for growing a site to that point, HatchBox sounded perfect.</p>
+
+<p>HatchBox prefers <a href="https://www.digitalocean.com/" target="_blank">DigitalOcean</a> as a services provider which was kind of OK with me as I find Google Cloud woefully slow and confusing to configure, and I find AWS completely Byzantine to try to get things done in. DigitalOcean, by contrast, is very point-and-click. You don’t need to jump through dozens of screens to get something ready to roll. Provisioning is also much, much faster.</p>
+
+<p>HatchBox’s lowest tier costs $29/month to manage two DigitalOcean instances/clusters. The first step is to connect HatchBox to your Github/Gitlab accounts and then to your DigitalOcean account. This sets up your ecosystem to allow you to create servers and deploy apps onto them.</p>
+
+<p>Creating servers/clusters and putting apps on them is a one-page form for each action. It’s all very well laid out and doesn’t confuse the user with tons of options. Same with deploying the apps. One page and done. There’s a “Deploy” button once you have things set up and one click is all it takes to deploy right from Git.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/assets/postimages/hbdo-2.png" alt="" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><em>Creating an instance on Hatchbox</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/assets/postimages/hbdo-1.png" alt="" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><em>Creating an app on Hatchbox</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If you install a simple callback hook, you can have your deploys trigger a deploy automagically. This isn’t as thorough as a Continuous Integration platform, but for a solo developer or small team where you just want to Get Things Done, it’s tough to beat.</p>
+
+<p>Log access is all available via the HatchBox web app, and a console is available from the DigitalOcean web app, so as a platform you get all the convenience you would find in Heroku.</p>
+
+<p>DigitalOcean has really upped their game of late, making the move even easier to justify. They now offer something called “<a href="https://www.digitalocean.com/products/spaces/" target="_blank">Spaces</a>” which is an AWS/S3 compliant CDN storage system. Basically for $5/mo you get everything you need but hosted on DO’s servers. So you don’t need to hassle with the AWS console at all if you go this route.</p>
+
+<p>This also ties into database backups. Hatchbox provides integration with the Backup gem as a one-click option. Click the button and it adds Backup to your instance and hooks it up into cron. A few minutes of editing config files and you can have nightly database back-ups deposited in your Spaces account (so they’re off the server) and you get notified over your Slack channel. Not quite as seamless as Heroku, but it gets the job done.</p>
+
+<p>Overall I’ve been happy with the performance. Deploys are quick and the servers seem quite snappy. Not being hobbled by Heroku’s pricing I can now deploy things like Redis and Elasticsearch on my own server. Also, Hatchbox makes it easy to deploy multiple apps on one server - so you can run a primary app and then have a few prototypes or demos also running on the same instance. Very handy.</p>
+
+<p>The final kicker was a new developer support network that DigitalOcean created called “<a href="https://www.digitalocean.com/hatch/" target="_blank">Hatch</a>”. No kidding … can’t beat the symmetry here. If you sign up and are approved for Hatch you get wired into their network and can get hosting credits. I’m just a solo developer and they accepted me and gave me $1000 in credits for the next year. That’s enough to let me move everything off Heroku and used the saved money for marketing my products. A really sweet deal.</p>
+
+<p>HatchBox/DigitalOcean is a great combination to launch products on. Whether prototypes or client demos. But it’s also strong enough to get a Rails-based venture into profitability. By the time you need to worry about the kinds of issues that AWS can help with, you’ll be making enough money to hire an operations expert who might actually enjoy tinkering with it endlessly.</p>
+</div>
+        <div class="share-page">
+    Share this on &rarr;
+    <a href="https://twitter.com/intent/tweet?text=DigitalOcean + HatchBox&url=http://localhost:4000/2019/08/18/digitalocean-plus-hatchbox.html" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2019/08/18/digitalocean-plus-hatchbox.html" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+    <a href="https://plus.google.com/share?url=http://localhost:4000/2019/08/18/digitalocean-plus-hatchbox.html" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+</div>
+
+
+      </section>
+      <footer>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+
+  
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-145823739-2");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  
+  </body>
+</html>
