@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>DigitalOcean + HatchBox | Bat Country Coding</title>
 
-    <link rel="stylesheet" href="/assets/css/style.css?v=008a96ad83eeb4cf3ab33505f2dce35bb052af0a">
+    <link rel="stylesheet" href="/assets/css/style.css?v=c21e2a25245b0f7d5e8587540207c27553c39d9d">
     <meta name="viewport" content="width=device-width">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata|Oswald|Special+Elite" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -105,7 +105,7 @@ Copyright (c) 2017-2018 Sharp Stone Codewerks / Mark S. Miller
 
 <p>DigitalOcean has really upped their game of late, making the move even easier to justify. They now offer something called “<a href="https://www.digitalocean.com/products/spaces/" target="_blank">Spaces</a>” which is an AWS/S3 compliant CDN storage system. Basically for $5/mo you get everything you need but hosted on DO’s servers. So you don’t need to hassle with the AWS console at all if you go this route.</p>
 
-<p>This also ties into database backups. Hatchbox provides integration with the Backup gem as a one-click option. Click the button and it adds Backup to your instance and hooks it up into cron. A few minutes of editing config files and you can have nightly database back-ups deposited in your Spaces account (so they’re off the server) and you get notified over your Slack channel. Not quite as seamless as Heroku, but it gets the job done.</p>
+<p>This also ties into database backups. Hatchbox provides integration with the Backup gem as a one-click option. Click the button and it adds Backup to your instance and hooks it up into cron. A few minutes of editing config files and you can have nightly database back-ups deposited in your Spaces account (so they’re off the server) and you get notified over your Slack channel. Not quite as seamless as Heroku, but it gets the job done. Note that DigitalOcean now also offers <a href="https://www.digitalocean.com/products/managed-databases/">Managed Databases</a>, so as your deployment grows you can easily migrate to a proper enterprise database with back-ups, optimizers, and so on. This is currently only available for PostgreSQL. <em>(UPDATE: Managed databases are now also available for Redis and MySQL.)</em></p>
 
 <p>Overall I’ve been happy with the performance. Deploys are quick and the servers seem quite snappy. Not being hobbled by Heroku’s pricing I can now deploy things like Redis and Elasticsearch on my own server. Also, Hatchbox makes it easy to deploy multiple apps on one server - so you can run a primary app and then have a few prototypes or demos also running on the same instance. Very handy.</p>
 

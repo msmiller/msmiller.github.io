@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Simple Blog System For Rails | Bat Country Coding</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=c21e2a25245b0f7d5e8587540207c27553c39d9d">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Oswald|Special+Elite" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="http://batcountrycoding.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://batcountrycoding.com/favicon_ani.ico" type="image/x-icon">
+    <meta property="og:image" content="http://localhost:4000/assets/images/batcountry1.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="631" />
+<meta property="og:image:height" content="298" />
+<meta property="og:title" content="Simple Blog System For Rails" />
+<meta property="og:description" content="When creating new products, adding a simple blog to document concepts and changes is a frequent need.  What I ended up doing was create a flat-file blog system with Markdown-formatted posts and a YAML definition file for the index and configuration." />
+<link rel="image_src" href="http://localhost:4000/assets/images/batcountry1.jpg" />
+
+  </head>
+  <body>
+    <div class="wrapper">
+
+      <!--
+@Author: msmiller
+@Date:   2019-08-15 15:14:12
+@Last Modified by:   msmiller
+@Last Modified time: 2019-08-15 15:53:52
+
+Copyright (c) 2017-2018 Sharp Stone Codewerks / Mark S. Miller
+-->
+
+<header style="border-right: 1px solid #ddd;">
+  <center><a href="http://localhost:4000"><img src="/assets/images/batcountry1.jpg"></a></center>
+  <h1 id="sitename"><a href="http://localhost:4000">Bat Country Coding</a></h1>
+  <h1 id="sitedesc">A Technology Blog<span class="blinking-cursor">|</span></h1>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="/posts.html">All Posts</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://sharpstonecodewerks.com" target="_away">Sharp Stone Codewerks</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.abstretta.com" target="_away">Abstretta.com</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="http://www.bibliogrify.com" target="_away">Bibliogrify.com</a></p>
+  <hr>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://github.com/msmiller" target="_away">Github</a></p>
+  <p class="view"><img src="/assets/images/chevron.png"> <a href="https://www.linkedin.com/in/msmiller" target="_away">LinkedIn</a></p>
+
+  
+
+  
+
+  
+</header>
+
+      <section>
+
+        <h1>Simple Blog System For Rails</h1>
+        <p class="date">November 26, 2019</p>
+        <div class="content"><p>When creating new products, adding a simple blog to document concepts and changes is a frequent need. In the early stages you’re making at most about two dozen posts a year, usually coincidental to a new release. So it’d take a couple years before one outgrew a ‘simple’ solution.</p>
+
+<p>What I ended up doing was create a flat-file blog system with Markdown-formatted posts and a YAML definition file for the index and configuration. I went with the SettingsLogic gem (<a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a>) for the configuration side and the RedCarpet gem (<a href="https://github.com/vmg/redcarpet">https://github.com/vmg/redcarpet</a>) for the rendering.</p>
+
+<p>The file structure is as follows:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">RAILS_ROOT/</span>
+  <span class="s">app/</span>
+    <span class="s">models/</span>
+      <span class="s">blog,rb</span>
+  <span class="s">static/</span>
+    <span class="s">index.yml</span>
+    <span class="s">posts/</span>
+      <span class="s">first_post.md</span>
+      <span class="s">second_post.md</span>
+  <span class="s">public/</span>
+    <span class="s">blog/</span>
+      <span class="s">splash_image.jpg</span>
+      <span class="s">social_image.jpg</span>
+      <span class="s">post_image_1.png</span>
+      <span class="s">post_image_2.png</span>
+</code></pre></div></div>
+
+<p>Very easy to manage.</p>
+
+<p>The <code class="highlighter-rouge">Blog</code> model loads the YAML index file and has some helper methods:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># blog.rb</span>
+
+<span class="c1"># https://github.com/settingslogic/settingslogic</span>
+
+<span class="k">class</span> <span class="nc">Blog</span> <span class="o">&lt;</span> <span class="no">Settingslogic</span>
+  <span class="n">source</span> <span class="s2">"</span><span class="si">#{</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="si">}</span><span class="s2">/static/blog/index.yml"</span>
+  <span class="n">namespace</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">env</span>
+  <span class="n">suppress_errors</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">env</span><span class="p">.</span><span class="nf">production?</span>
+  <span class="nb">load</span><span class="o">!</span>
+
+  <span class="k">def</span> <span class="nf">select_post</span><span class="p">(</span><span class="n">slug</span><span class="p">)</span>
+    <span class="n">posts</span><span class="p">.</span><span class="nf">find</span> <span class="p">{</span><span class="o">|</span><span class="nb">p</span><span class="o">|</span> <span class="nb">p</span><span class="p">[</span><span class="s1">'slug'</span><span class="p">]</span> <span class="o">==</span> <span class="n">slug</span> <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">splash_image</span>
+    <span class="s2">"/blog/</span><span class="si">#{</span><span class="n">splash</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">meta_splash_image</span>
+    <span class="s2">"/blog/</span><span class="si">#{</span><span class="n">meta_splash</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">render_post</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">begin</span>
+      <span class="n">body</span> <span class="o">=</span> <span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"</span><span class="si">#{</span><span class="no">Rails</span><span class="p">.</span><span class="nf">root</span><span class="si">}</span><span class="s2">/static/blog/posts/</span><span class="si">#{</span><span class="n">file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+      <span class="n">redcarpet_flags</span> <span class="o">=</span> <span class="p">{</span>
+          <span class="ss">:safe_links_only</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+          <span class="ss">:autolink</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+          <span class="ss">:disable_indented_code_blocks</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">,</span>
+          <span class="ss">:fenced_code_blocks</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+          <span class="ss">:no_images</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+          <span class="ss">:filter_htm</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">,</span>
+          <span class="ss">:hard_wrap</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+        <span class="p">}</span>
+      <span class="n">markdown</span> <span class="o">=</span> <span class="no">Redcarpet</span><span class="o">::</span><span class="no">Markdown</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">Redcarpet</span><span class="o">::</span><span class="no">Render</span><span class="o">::</span><span class="no">HTML</span><span class="p">,</span> <span class="n">redcarpet_flags</span><span class="p">)</span>
+      <span class="n">filtered_text</span> <span class="o">=</span> <span class="n">markdown</span><span class="p">.</span><span class="nf">render</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+      <span class="n">filtered_text</span>
+    <span class="k">rescue</span>
+      <span class="s2">""</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>As is the configuration file:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># index.yml</span>
+
+<span class="c1"># https://github.com/settingslogic/settingslogic</span>
+
+<span class="na">defaults</span><span class="pi">:</span> <span class="nl">&amp;defaults</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Abstretta Blog</span>
+  <span class="na">splash</span><span class="pi">:</span> <span class="s">splash.jpg</span>
+  <span class="na">meta_splash</span><span class="pi">:</span> <span class="s">social.jpg</span>
+  <span class="na">posts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">First Post</span>
+      <span class="na">date</span><span class="pi">:</span> <span class="s">2018-09-01</span>
+      <span class="na">file</span><span class="pi">:</span> <span class="s">first_post.md</span>
+      <span class="na">slug</span><span class="pi">:</span> <span class="s">first_post</span>
+      <span class="na">tags</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+      <span class="na">excerpt</span><span class="pi">:</span> <span class="s">The first post on the new Abstretta blogging system</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">'Opportunity</span><span class="nv"> </span><span class="s">Knocks'</span><span class="nv"> </span><span class="s">Release"</span>
+      <span class="na">date</span><span class="pi">:</span> <span class="s">2018-09-11</span>
+      <span class="na">file</span><span class="pi">:</span> <span class="s">opportunity_knocks.md</span>
+      <span class="na">slug</span><span class="pi">:</span> <span class="s">opportunity_knocks</span>
+      <span class="na">tags</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+      <span class="na">excerpt</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Big</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">features</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">latest</span><span class="nv"> </span><span class="s">release,</span><span class="nv"> </span><span class="s">including</span><span class="nv"> </span><span class="s">'Opportunities'"</span>
+
+<span class="na">development</span><span class="pi">:</span>
+  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*defaults</span>
+
+<span class="na">test</span><span class="pi">:</span>
+  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*defaults</span>
+
+<span class="na">production</span><span class="pi">:</span>
+  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*defaults</span>
+
+<span class="na">staging</span><span class="pi">:</span>
+  <span class="s">&lt;&lt;</span><span class="pi">:</span> <span class="nv">*defaults</span>
+</code></pre></div></div>
+
+<p>Again, this is pretty easy stuff. The controller for just showing a post is also easy stuff:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># blog_controller.rb
+
+class BlogController &lt; ApplicationController
+
+  skip_before_action :authenticate_user!
+
+  def index
+  end
+
+  def show
+    @post = Blog.select_post(params[:id])
+    @body = Blog.render_post(@post['file'])
+  end
+
+  def list
+  end
+end
+</code></pre></div></div>
+
+<p>I haven’t done the list-type pages yet, but by the time this goes live they’ll be done. Note the <code class="highlighter-rouge">skip_before_action</code> … this also implies I didn’t need to write an admin system to manage the blog. Since I’m the only one posting, this is a good thing.</p>
+</div>
+        <div class="share-page">
+    Share this on &rarr;
+    <a href="https://twitter.com/intent/tweet?text=Simple Blog System For Rails&url=http://localhost:4000/2019/11/26/simple_blog_system.html" rel="nofollow" target="_blank" title="Share on Twitter">Twitter</a>
+    <a href="https://facebook.com/sharer.php?u=http://localhost:4000/2019/11/26/simple_blog_system.html" rel="nofollow" target="_blank" title="Share on Facebook">Facebook</a>
+    <a href="https://plus.google.com/share?url=http://localhost:4000/2019/11/26/simple_blog_system.html" rel="nofollow" target="_blank" title="Share on Google+">Google+</a>
+</div>
+
+
+      </section>
+      <footer>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+
+  
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-145823739-2");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  
+  </body>
+</html>

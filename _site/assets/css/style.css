@@ -255,3 +255,6 @@ header hr { margin: 10px 0; }
   50% { color: #bcb; } }
 @-o-keyframes "blink" { from, to { color: transparent; }
   50% { color: #bcb; } }
+pre.highlight { font-size: 10pt; }
+
+code.highlighter-rouge { font-size: 10pt; }
